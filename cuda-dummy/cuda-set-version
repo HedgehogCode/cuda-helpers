@@ -30,3 +30,6 @@ fi
 
 # Link the current CUDA installation
 ln -s ${cudadir} ${linkdir}
+
+# Update the shared libraries
+ldconfig

@@ -31,3 +31,6 @@ fi
 
 # Link the current cudNN installation
 ln -s ${cudnndir} ${linkdir}
+
+# Update the shared libraries
+ldconfig

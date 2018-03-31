@@ -1,5 +1,5 @@
 pkgname="cudnn-dummy"
-pkgver=0.0.1
+pkgver=0.0.2
 pkgrel=1
 pkgdesc="Dummy package for cudNN"
 arch=('any')
@@ -9,7 +9,7 @@ install=cudnn-dummy.install
 source=(cudnn.conf
 	cudnn-set-version)
 sha512sums=('7b479555abbac79de7d988e4d601bd8d6fecf72ca7228ee821408c889cabfdd27ecf8c8bb430e6d1bd031f2fbcef811403e87366a8abe7c63acf71cc950c7d5a'
-            '76d551a059bf9f343a715a82852c42d43c67e966cf0f30c928e93e76ad338deab63b3a4ffa11b873029dbf2e7e8ad4f4ad40a943d324376079869ccfc47694fa')
+            'c55ea25397b5d44c9f45597acdc7bea705c4a8a3372922e16eb1761ecc8da8ee4544d9e46fed62a899d6444056333aa86d8c82cc78ea064936efda7dcc233aee')
 
 package() {
   install -Dm644 "${srcdir}/cudnn.conf" "${pkgdir}/etc/ld.so.conf.d/cudnn.conf"
