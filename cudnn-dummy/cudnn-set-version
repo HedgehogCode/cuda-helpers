@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# Sets the cudnn version by symlinking the given version to /opt/cudnn
+
+cuda_version=$1
+cudnn_version=$2
+basedir='/opt'
+cudnndir="${basedir}/cudnn-${cuda_version}-${cudnn_version}"
+linkdir="${basedir}/cudnn"
+
+# Check if the CUDA installation exists
+if ! [ -d ${cudnndir} ]
+then
+	echo "The directory ${cudnndir} doesn't exist. Make sure to install cudNN ${cudnn_version} for CUDA ${cuda_version} in this directory."
+	exit 1
+fi
+
+# Check if /opt/cudnn exists already
+if [ -e ${linkdir} ]
+then
+	# Check if it is a symbolic link
+	if ! [ -h ${linkdir} ]
+	then
+		echo "${linkdir} exists but is not a symbolic link."
+		exit 1
+	fi
+
+	# Delete it
+	rm ${linkdir}
+fi
+
+# Link the current cudNN installation
+ln -s ${cudnndir} ${linkdir}

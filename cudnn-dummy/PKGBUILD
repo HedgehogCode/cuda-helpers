@@ -1,0 +1,17 @@
+pkgname="cudnn-dummy"
+pkgver=0.0.1
+pkgrel=1
+pkgdesc="Dummy package for cudNN"
+arch=('any')
+url="https://developer.nvidia.com/cudnn"
+depends=('gcc-libs' 'opencl-nvidia')
+install=cudnn-dummy.install
+source=(cudnn.conf
+	cudnn-set-version)
+sha512sums=('7b479555abbac79de7d988e4d601bd8d6fecf72ca7228ee821408c889cabfdd27ecf8c8bb430e6d1bd031f2fbcef811403e87366a8abe7c63acf71cc950c7d5a'
+            '76d551a059bf9f343a715a82852c42d43c67e966cf0f30c928e93e76ad338deab63b3a4ffa11b873029dbf2e7e8ad4f4ad40a943d324376079869ccfc47694fa')
+
+package() {
+  install -Dm644 "${srcdir}/cudnn.conf" "${pkgdir}/etc/ld.so.conf.d/cudnn.conf"
+  install -Dm755 "${srcdir}/cudnn-set-version" "${pkgdir}/usr/bin/cudnn-set-version"
+}

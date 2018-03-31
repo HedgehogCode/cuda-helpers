@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Sets the cuda version by symlinking the given version to /opt/cuda
+
+version=$1
+basedir='/opt'
+cudadir="${basedir}/cuda-${version}"
+linkdir="${basedir}/cuda"
+
+# Check if the CUDA installation exists
+if ! [ -d ${cudadir} ]
+then
+	echo "The directory ${cudadir} doesn't exist. Make sure to install CUDA ${version} in this directory."
+	exit 1
+fi
+
+# Check if /opt/cuda exists already
+if [ -e ${linkdir} ]
+then
+	# Check if it is a symbolic link
+	if ! [ -h ${linkdir} ]
+	then
+		echo "${linkdir} exists but is not a symbolic link."
+		exit 1
+	fi
+
+	# Delete it
+	rm ${linkdir}
+fi
+
+# Link the current CUDA installation
+ln -s ${cudadir} ${linkdir}

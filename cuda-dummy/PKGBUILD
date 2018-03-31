@@ -1,0 +1,20 @@
+pkgname="cuda-dummy"
+pkgver=0.0.1
+pkgrel=1
+pkgdesc="Dummy package for CUDA"
+arch=('any')
+url="https://developer.nvidia.com/cuda-downloads"
+depends=('gcc-libs' 'opencl-nvidia')
+install=cuda-dummy.install
+source=(cuda.sh
+        cuda.conf
+	cuda-set-version)
+sha512sums=('10dbbaf61d9afac7371c24fac9711b8280a8962f7d509be9e3842e402dece1e21838898106ea6e46e7c3dabf4e4e4c65a55ef4ff9e814779885c73e06c084f29'
+            'a8beb2d28548e7fc7b422301b43dfea988b39873ab4b5e06f55575372050e66c1639370439589e77c40389078b3289183725419a2b5f1312b41ff22b42a36e3b'
+	    '7f04700f396b93c6f31950713e1fb56c8571c1b7ae4cf3e72c2bf9d0ff0f4ff9133b0940cfb56fede6b1979a85ac5053994a533157e65ecd2c4daebced937c9a')
+
+package() {
+  install -Dm755 "${srcdir}/cuda.sh" "${pkgdir}/etc/profile.d/cuda.sh"
+  install -Dm644 "${srcdir}/cuda.conf" "${pkgdir}/etc/ld.so.conf.d/cuda.conf"
+  install -Dm755 "${srcdir}/cuda-set-version" "${pkgdir}/usr/bin/cuda-set-version"
+}
