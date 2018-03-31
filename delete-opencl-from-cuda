@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Script to delte the openCL shared library from a cuda installation
+
+version=$1
+basedir='/opt'
+cudadir="${basedir}/cuda-${version}"
+
+# Check if the CUDA installation exists
+if ! [ -d ${cudadir} ]
+then
+	echo "The directory ${cudadir} doesn't exist. Make sure to install CUDA ${version} in this directory."
+	exit 1
+fi
+
+# Delete the openCL library
+rm ${cudadir}/lib64/libOpenCL.so*
